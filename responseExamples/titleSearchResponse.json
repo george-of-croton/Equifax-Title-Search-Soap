@@ -1,0 +1,22 @@
+{
+  "response-header": {
+    "datetime-requested": "2017-07-12T09:18:58.898+10:00",
+    "datetime-generated": "2017-07-12T09:19:00.079+10:00",
+    "client-reference": "27c23fc8-5f70-4902-932d-20bd4c3d4dd4",
+    "operator-id": "98603303126",
+    "operator-name": "AX"
+  },
+  "search-land-titles-response-data": {
+    "land-titles": {
+      "land-title": [{
+        "state-territory-land-registry": "VIC",
+        "title-reference": "5185/881 (Cancelled)",
+        "title-description": "17 ANZAC AVENUE, COBURG NORTH 3058"
+      }, {
+        "state-territory-land-registry": "VIC",
+        "title-reference": "5352/201",
+        "title-description": "17 ANZAC AVENUE, COBURG NORTH 3058"
+      }]
+    }
+  }
+}

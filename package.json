@@ -1,0 +1,22 @@
+{
+  "name": "vedaintegration",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "rm ./test.xml && node SOAPTEST.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "basic-xml2json": "^1.0.4",
+    "body-parser": "^1.17.2",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.3",
+    "npm": "^5.0.4",
+    "path": "^0.12.7",
+    "request": "^2.81.0",
+    "soap": "github:george-of-croton/node-soap"
+  }
+}

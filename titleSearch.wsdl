@@ -1,0 +1,4731 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+IMPORTANT NOTE:
+The following schema and its associated WSDL artefacts are provided in order to facilitate and support integration with the Integrated Land Titles web service, by providing a view of message structure and data types. However, the schema should not - and cannot - be interpreted as providing a comprehensive view of  business rules attached to request and response data.
+
+Veda recommends that service integrators refer to the VedaConnect Product Guide for Integrated Land Titles in order to gain a complete view of the service contract, especially with regards to field-level rules of optionality, cardinality and formatting.
+-->
+<wsdl:definitions xmlns:lt="http://vedaxml.com/vxml2/land-titles-v1-0.xsd" xmlns:tns="http://vedaxml.com/vxml2/land-titles-v1-0.wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://vedaxml.com/vxml2/land-titles-v1-0.wsdl">
+	<wsdl:documentation>
+		Service: LandTitlesManagementService
+		Version: 1.0
+		Owner: Veda
+	</wsdl:documentation>
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xmime="http://www.w3.org/2005/05/xmlmime" targetNamespace="http://www.w3.org/2005/05/xmlmime">
+			<xs:attribute name="contentType">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="3"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="expectedContentTypes" type="xs:string"/>
+			<xs:complexType name="base64Binary">
+				<xs:simpleContent>
+					<xs:extension base="xs:base64Binary">
+						<xs:attribute ref="xmime:contentType"/>
+					</xs:extension>
+				</xs:simpleContent>
+			</xs:complexType>
+			<xs:complexType name="hexBinary">
+				<xs:simpleContent>
+					<xs:extension base="xs:hexBinary">
+						<xs:attribute ref="xmime:contentType"/>
+					</xs:extension>
+				</xs:simpleContent>
+			</xs:complexType>
+		</xs:schema>
+		<xs:schema xmlns:lt="http://vedaxml.com/vxml2/land-titles-v1-0.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xmime="http://www.w3.org/2005/05/xmlmime" targetNamespace="http://vedaxml.com/vxml2/land-titles-v1-0.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+			<xs:import namespace="http://www.w3.org/2005/05/xmlmime"/>
+			<xs:simpleType name="country-codes">
+				<xs:annotation>
+					<xs:documentation>Veda use the ISO 3166-1 alpha-3 three-letter country codes published by the International Organization for Standardization (ISO), to represent countries, dependent territories, and special areas of geographical interest. They allow a better visual association between the codes and the country names than the two-letter alpha-2 codes.</xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="ABW">
+						<xs:annotation>
+							<xs:documentation>Aruba</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="AFG">
+						<xs:annotation>
+							<xs:documentation>Afghanistan</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="AGO">
+						<xs:annotation>
+							<xs:documentation>Angola</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="AIA">
+						<xs:annotation>
+							<xs:documentation>Anguilla</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ALA">
+						<xs:annotation>
+							<xs:documentation>Åland Islands</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ALB">
+						<xs:annotation>
+							<xs:documentation>Albania</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="AND">
+						<xs:annotation>
+							<xs:documentation>Andorra</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ARE">
+						<xs:annotation>
+							<xs:documentation>United Arab Emirates</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ARG">
+						<xs:annotation>
+							<xs:documentation>Argentina</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ARM">
+						<xs:annotation>
+							<xs:documentation>Armenia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ASM">
+						<xs:annotation>
+							<xs:documentation>American Samoa</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ATA">
+						<xs:annotation>
+							<xs:documentation>Antarctica</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ATF">
+						<xs:annotation>
+							<xs:documentation>French Southern Territories</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ATG">
+						<xs:annotation>
+							<xs:documentation>Antigua and Barbuda</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="AUS">
+						<xs:annotation>
+							<xs:documentation>Australia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="AUT">
+						<xs:annotation>
+							<xs:documentation>Austria</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="AZE">
+						<xs:annotation>
+							<xs:documentation>Azerbaijan</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BDI">
+						<xs:annotation>
+							<xs:documentation>Burundi</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BEL">
+						<xs:annotation>
+							<xs:documentation>Belgium</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BEN">
+						<xs:annotation>
+							<xs:documentation>Benin</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BFA">
+						<xs:annotation>
+							<xs:documentation>Burkina Faso</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BGD">
+						<xs:annotation>
+							<xs:documentation>Bangladesh</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BGR">
+						<xs:annotation>
+							<xs:documentation>Bulgaria</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BHR">
+						<xs:annotation>
+							<xs:documentation>Bahrain</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BHS">
+						<xs:annotation>
+							<xs:documentation>Bahamas</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BIH">
+						<xs:annotation>
+							<xs:documentation>Bosnia and Herzegovina</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BLM">
+						<xs:annotation>
+							<xs:documentation>Saint Barthélemy</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BLR">
+						<xs:annotation>
+							<xs:documentation>Belarus</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BLZ">
+						<xs:annotation>
+							<xs:documentation>Belize</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BMU">
+						<xs:annotation>
+							<xs:documentation>Bermuda</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BOL">
+						<xs:annotation>
+							<xs:documentation>Bolivia, Plurinational State of</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BRA">
+						<xs:annotation>
+							<xs:documentation>Brazil</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BRB">
+						<xs:annotation>
+							<xs:documentation>Barbados</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BRN">
+						<xs:annotation>
+							<xs:documentation>Brunei Darussalam</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BTN">
+						<xs:annotation>
+							<xs:documentation>Bhutan</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BVT">
+						<xs:annotation>
+							<xs:documentation>Bouvet Island</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BWA">
+						<xs:annotation>
+							<xs:documentation>Botswana</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CAF">
+						<xs:annotation>
+							<xs:documentation>Central African Republic</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CAN">
+						<xs:annotation>
+							<xs:documentation>Canada</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CCK">
+						<xs:annotation>
+							<xs:documentation>Cocos (Keeling) Islands</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CHE">
+						<xs:annotation>
+							<xs:documentation>Switzerland</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CHL">
+						<xs:annotation>
+							<xs:documentation>Chile</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CHN">
+						<xs:annotation>
+							<xs:documentation>China</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CIV">
+						<xs:annotation>
+							<xs:documentation>Côte d'Ivoire</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CMR">
+						<xs:annotation>
+							<xs:documentation>Cameroon</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="COD">
+						<xs:annotation>
+							<xs:documentation>Congo, the Democratic Republic of the</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="COG">
+						<xs:annotation>
+							<xs:documentation>Congo</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="COK">
+						<xs:annotation>
+							<xs:documentation>Cook Islands</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="COL">
+						<xs:annotation>
+							<xs:documentation>Colombia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="COM">
+						<xs:annotation>
+							<xs:documentation>Comoros</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CPV">
+						<xs:annotation>
+							<xs:documentation>Cabo Verde</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CRI">
+						<xs:annotation>
+							<xs:documentation>Costa Rica</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CUB">
+						<xs:annotation>
+							<xs:documentation>Cuba</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CUW">
+						<xs:annotation>
+							<xs:documentation>Curaçao</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CXR">
+						<xs:annotation>
+							<xs:documentation>Christmas Island</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CYM">
+						<xs:annotation>
+							<xs:documentation>Cayman Islands</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CYP">
+						<xs:annotation>
+							<xs:documentation>Cyprus</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CZE">
+						<xs:annotation>
+							<xs:documentation>Czech Republic</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="DEU">
+						<xs:annotation>
+							<xs:documentation>Germany</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="DJI">
+						<xs:annotation>
+							<xs:documentation>Djibouti</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="DMA">
+						<xs:annotation>
+							<xs:documentation>Dominica</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="DNK">
+						<xs:annotation>
+							<xs:documentation>Denmark</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="DOM">
+						<xs:annotation>
+							<xs:documentation>Dominican Republic</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="DZA">
+						<xs:annotation>
+							<xs:documentation>Algeria</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ECU">
+						<xs:annotation>
+							<xs:documentation>Ecuador</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="EGY">
+						<xs:annotation>
+							<xs:documentation>Egypt</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ERI">
+						<xs:annotation>
+							<xs:documentation>Eritrea</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ESH">
+						<xs:annotation>
+							<xs:documentation>Western Sahara</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ESP">
+						<xs:annotation>
+							<xs:documentation>Spain</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="EST">
+						<xs:annotation>
+							<xs:documentation>Estonia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ETH">
+						<xs:annotation>
+							<xs:documentation>Ethiopia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="FIN">
+						<xs:annotation>
+							<xs:documentation>Finland</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="FJI">
+						<xs:annotation>
+							<xs:documentation>Fiji</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="FLK">
+						<xs:annotation>
+							<xs:documentation>Falkland Islands (Malvinas)</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="FRA">
+						<xs:annotation>
+							<xs:documentation>France</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="FRO">
+						<xs:annotation>
+							<xs:documentation>Faroe Islands</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="FSM">
+						<xs:annotation>
+							<xs:documentation>Micronesia, Federated States of</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GAB">
+						<xs:annotation>
+							<xs:documentation>Gabon</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GBR">
+						<xs:annotation>
+							<xs:documentation>United Kingdom</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GEO">
+						<xs:annotation>
+							<xs:documentation>Georgia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GGY">
+						<xs:annotation>
+							<xs:documentation>Guernsey</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GHA">
+						<xs:annotation>
+							<xs:documentation>Ghana</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GIB">
+						<xs:annotation>
+							<xs:documentation>Gibraltar</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GIN">
+						<xs:annotation>
+							<xs:documentation>Guinea</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GLP">
+						<xs:annotation>
+							<xs:documentation>Guadeloupe</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GMB">
+						<xs:annotation>
+							<xs:documentation>Gambia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GNB">
+						<xs:annotation>
+							<xs:documentation>Guinea-Bissau</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GNQ">
+						<xs:annotation>
+							<xs:documentation>Equatorial Guinea</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GRC">
+						<xs:annotation>
+							<xs:documentation>Greece</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GRD">
+						<xs:annotation>
+							<xs:documentation>Grenada</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GRL">
+						<xs:annotation>
+							<xs:documentation>Greenland</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GTM">
+						<xs:annotation>
+							<xs:documentation>Guatemala</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GUF">
+						<xs:annotation>
+							<xs:documentation>French Guiana</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GUM">
+						<xs:annotation>
+							<xs:documentation>Guam</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GUY">
+						<xs:annotation>
+							<xs:documentation>Guyana</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="HKG">
+						<xs:annotation>
+							<xs:documentation>Hong Kong</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="HMD">
+						<xs:annotation>
+							<xs:documentation>Heard Island and McDonald Islands</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="HND">
+						<xs:annotation>
+							<xs:documentation>Honduras</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="HRV">
+						<xs:annotation>
+							<xs:documentation>Croatia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="HTI">
+						<xs:annotation>
+							<xs:documentation>Haiti</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="HUN">
+						<xs:annotation>
+							<xs:documentation>Hungary</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="IDN">
+						<xs:annotation>
+							<xs:documentation>Indonesia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="IMN">
+						<xs:annotation>
+							<xs:documentation>Isle of Man</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="IND">
+						<xs:annotation>
+							<xs:documentation>India</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="IOT">
+						<xs:annotation>
+							<xs:documentation>British Indian Ocean Territory</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="IRL">
+						<xs:annotation>
+							<xs:documentation>Ireland</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="IRN">
+						<xs:annotation>
+							<xs:documentation>Iran, Islamic Republic of</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="IRQ">
+						<xs:annotation>
+							<xs:documentation>Iraq</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ISL">
+						<xs:annotation>
+							<xs:documentation>Iceland</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ISR">
+						<xs:annotation>
+							<xs:documentation>Israel</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ITA">
+						<xs:annotation>
+							<xs:documentation>Italy</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="JAM">
+						<xs:annotation>
+							<xs:documentation>Jamaica</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="JEY">
+						<xs:annotation>
+							<xs:documentation>Jersey</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="JOR">
+						<xs:annotation>
+							<xs:documentation>Jordan</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="JPN">
+						<xs:annotation>
+							<xs:documentation>Japan</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="KAZ">
+						<xs:annotation>
+							<xs:documentation>Kazakhstan</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="KEN">
+						<xs:annotation>
+							<xs:documentation>Kenya</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="KGZ">
+						<xs:annotation>
+							<xs:documentation>Kyrgyzstan</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="KHM">
+						<xs:annotation>
+							<xs:documentation>Cambodia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="KIR">
+						<xs:annotation>
+							<xs:documentation>Kiribati</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="KNA">
+						<xs:annotation>
+							<xs:documentation>Saint Kitts and Nevis</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="KOR">
+						<xs:annotation>
+							<xs:documentation>Korea, Republic of</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="KWT">
+						<xs:annotation>
+							<xs:documentation>Kuwait</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="LAO">
+						<xs:annotation>
+							<xs:documentation>Lao People's Democratic Republic</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="LBN">
+						<xs:annotation>
+							<xs:documentation>Lebanon</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="LBR">
+						<xs:annotation>
+							<xs:documentation>Liberia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="LBY">
+						<xs:annotation>
+							<xs:documentation>Libya</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="LCA">
+						<xs:annotation>
+							<xs:documentation>Saint Lucia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="LIE">
+						<xs:annotation>
+							<xs:documentation>Liechtenstein</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="LKA">
+						<xs:annotation>
+							<xs:documentation>Sri Lanka</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="LSO">
+						<xs:annotation>
+							<xs:documentation>Lesotho</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="LTU">
+						<xs:annotation>
+							<xs:documentation>Lithuania</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="LUX">
+						<xs:annotation>
+							<xs:documentation>Luxembourg</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="LVA">
+						<xs:annotation>
+							<xs:documentation>Latvia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MAC">
+						<xs:annotation>
+							<xs:documentation>Macao</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MAF">
+						<xs:annotation>
+							<xs:documentation>Saint Martin (French part)</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MAR">
+						<xs:annotation>
+							<xs:documentation>Morocco</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MCO">
+						<xs:annotation>
+							<xs:documentation>Monaco</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MDA">
+						<xs:annotation>
+							<xs:documentation>Moldova, Republic of</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MDG">
+						<xs:annotation>
+							<xs:documentation>Madagascar</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MDV">
+						<xs:annotation>
+							<xs:documentation>Maldives</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MEX">
+						<xs:annotation>
+							<xs:documentation>Mexico</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MHL">
+						<xs:annotation>
+							<xs:documentation>Marshall Islands</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MKD">
+						<xs:annotation>
+							<xs:documentation>Macedonia, the former Yugoslav Republic of</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MLI">
+						<xs:annotation>
+							<xs:documentation>Mali</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MLT">
+						<xs:annotation>
+							<xs:documentation>Malta</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MMR">
+						<xs:annotation>
+							<xs:documentation>Myanmar</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MNE">
+						<xs:annotation>
+							<xs:documentation>Montenegro</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MNG">
+						<xs:annotation>
+							<xs:documentation>Mongolia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MNP">
+						<xs:annotation>
+							<xs:documentation>Northern Mariana Islands</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MOZ">
+						<xs:annotation>
+							<xs:documentation>Mozambique</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MRT">
+						<xs:annotation>
+							<xs:documentation>Mauritania</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MSR">
+						<xs:annotation>
+							<xs:documentation>Montserrat</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MTQ">
+						<xs:annotation>
+							<xs:documentation>Martinique</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MUS">
+						<xs:annotation>
+							<xs:documentation>Mauritius</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MWI">
+						<xs:annotation>
+							<xs:documentation>Malawi</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MYS">
+						<xs:annotation>
+							<xs:documentation>Malaysia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MYT">
+						<xs:annotation>
+							<xs:documentation>Mayotte</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="NAM">
+						<xs:annotation>
+							<xs:documentation>Namibia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="NCL">
+						<xs:annotation>
+							<xs:documentation>New Caledonia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="NER">
+						<xs:annotation>
+							<xs:documentation>Niger</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="NFK">
+						<xs:annotation>
+							<xs:documentation>Norfolk Island</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="NGA">
+						<xs:annotation>
+							<xs:documentation>Nigeria</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="NIC">
+						<xs:annotation>
+							<xs:documentation>Nicaragua</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="NIU">
+						<xs:annotation>
+							<xs:documentation>Niue</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="NLD">
+						<xs:annotation>
+							<xs:documentation>Netherlands</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="NOR">
+						<xs:annotation>
+							<xs:documentation>Norway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="NPL">
+						<xs:annotation>
+							<xs:documentation>Nepal</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="NRU">
+						<xs:annotation>
+							<xs:documentation>Nauru</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="NZL">
+						<xs:annotation>
+							<xs:documentation>New Zealand</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="OMN">
+						<xs:annotation>
+							<xs:documentation>Oman</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PAK">
+						<xs:annotation>
+							<xs:documentation>Pakistan</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PAN">
+						<xs:annotation>
+							<xs:documentation>Panama</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PCN">
+						<xs:annotation>
+							<xs:documentation>Pitcairn</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PER">
+						<xs:annotation>
+							<xs:documentation>Peru</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PHL">
+						<xs:annotation>
+							<xs:documentation>Philippines</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PLW">
+						<xs:annotation>
+							<xs:documentation>Palau</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PNG">
+						<xs:annotation>
+							<xs:documentation>Papua New Guinea</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="POL">
+						<xs:annotation>
+							<xs:documentation>Poland</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PRI">
+						<xs:annotation>
+							<xs:documentation>Puerto Rico</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PRK">
+						<xs:annotation>
+							<xs:documentation>Korea, Democratic People's Republic of</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PRT">
+						<xs:annotation>
+							<xs:documentation>Portugal</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PRY">
+						<xs:annotation>
+							<xs:documentation>Paraguay</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PSE">
+						<xs:annotation>
+							<xs:documentation>Palestinian Territory, Occupied</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PYF">
+						<xs:annotation>
+							<xs:documentation>French Polynesia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="QAT">
+						<xs:annotation>
+							<xs:documentation>Qatar</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="REU">
+						<xs:annotation>
+							<xs:documentation>Réunion</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ROU">
+						<xs:annotation>
+							<xs:documentation>Romania</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RUS">
+						<xs:annotation>
+							<xs:documentation>Russian Federation</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RWA">
+						<xs:annotation>
+							<xs:documentation>Rwanda</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SAU">
+						<xs:annotation>
+							<xs:documentation>Saudi Arabia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SDN">
+						<xs:annotation>
+							<xs:documentation>Sudan</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SEN">
+						<xs:annotation>
+							<xs:documentation>Senegal</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SGP">
+						<xs:annotation>
+							<xs:documentation>Singapore</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SGS">
+						<xs:annotation>
+							<xs:documentation>South Georgia and the South Sandwich Islands</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SHN">
+						<xs:annotation>
+							<xs:documentation>Saint Helena</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SJM">
+						<xs:annotation>
+							<xs:documentation>Svalbard and Jan Mayen</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SLB">
+						<xs:annotation>
+							<xs:documentation>Solomon Islands</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SLE">
+						<xs:annotation>
+							<xs:documentation>Sierra Leone</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SLV">
+						<xs:annotation>
+							<xs:documentation>El Salvador</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SMR">
+						<xs:annotation>
+							<xs:documentation>San Marino</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SOM">
+						<xs:annotation>
+							<xs:documentation>Somalia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SPM">
+						<xs:annotation>
+							<xs:documentation>Saint Pierre and Miquelon</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SRB">
+						<xs:annotation>
+							<xs:documentation>Serbia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SSD">
+						<xs:annotation>
+							<xs:documentation>South Sudan</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="STP">
+						<xs:annotation>
+							<xs:documentation>Sao Tome and Principe</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SUR">
+						<xs:annotation>
+							<xs:documentation>Suriname</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SVK">
+						<xs:annotation>
+							<xs:documentation>Slovakia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SVN">
+						<xs:annotation>
+							<xs:documentation>Slovenia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SWE">
+						<xs:annotation>
+							<xs:documentation>Sweden</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SWZ">
+						<xs:annotation>
+							<xs:documentation>Swaziland</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SXM">
+						<xs:annotation>
+							<xs:documentation>Sint Maarten (Dutch part)</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SYC">
+						<xs:annotation>
+							<xs:documentation>Seychelles</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SYR">
+						<xs:annotation>
+							<xs:documentation>Syrian Arab Republic</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TCA">
+						<xs:annotation>
+							<xs:documentation>Turks and Caicos Islands</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TCD">
+						<xs:annotation>
+							<xs:documentation>Chad</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TGO">
+						<xs:annotation>
+							<xs:documentation>Togo</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="THA">
+						<xs:annotation>
+							<xs:documentation>Thailand</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TJK">
+						<xs:annotation>
+							<xs:documentation>Tajikistan</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TKL">
+						<xs:annotation>
+							<xs:documentation>Tokelau</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TKM">
+						<xs:annotation>
+							<xs:documentation>Turkmenistan</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TLS">
+						<xs:annotation>
+							<xs:documentation>Timor-Leste</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TON">
+						<xs:annotation>
+							<xs:documentation>Tonga</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TTO">
+						<xs:annotation>
+							<xs:documentation>Trinidad and Tobago</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TUN">
+						<xs:annotation>
+							<xs:documentation>Tunisia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TUR">
+						<xs:annotation>
+							<xs:documentation>Turkey</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TUV">
+						<xs:annotation>
+							<xs:documentation>Tuvalu</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TWN">
+						<xs:annotation>
+							<xs:documentation>Taiwan, Province of China</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TZA">
+						<xs:annotation>
+							<xs:documentation>Tanzania, United Republic of</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="UGA">
+						<xs:annotation>
+							<xs:documentation>Uganda</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="UKR">
+						<xs:annotation>
+							<xs:documentation>Ukraine</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="UMI">
+						<xs:annotation>
+							<xs:documentation>United States Minor Outlying Islands</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="URY">
+						<xs:annotation>
+							<xs:documentation>Uruguay</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="USA">
+						<xs:annotation>
+							<xs:documentation>United States</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="UZB">
+						<xs:annotation>
+							<xs:documentation>Uzbekistan</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="VAT">
+						<xs:annotation>
+							<xs:documentation>Holy See (Vatican City State)</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="VCT">
+						<xs:annotation>
+							<xs:documentation>Saint Vincent and the Grenadines</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="VEN">
+						<xs:annotation>
+							<xs:documentation>Venezuela, Bolivarian Republic of</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="VGB">
+						<xs:annotation>
+							<xs:documentation>Virgin Islands, British</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="VIR">
+						<xs:annotation>
+							<xs:documentation>Virgin Islands, U.S.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="VNM">
+						<xs:annotation>
+							<xs:documentation>Viet Nam</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="VUT">
+						<xs:annotation>
+							<xs:documentation>Vanuatu</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="WLF">
+						<xs:annotation>
+							<xs:documentation>Wallis and Futuna</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="WSM">
+						<xs:annotation>
+							<xs:documentation>Samoa</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="YEM">
+						<xs:annotation>
+							<xs:documentation>Yemen</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ZAF">
+						<xs:annotation>
+							<xs:documentation>South Africa</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ZMB">
+						<xs:annotation>
+							<xs:documentation>Zambia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ZWE">
+						<xs:annotation>
+							<xs:documentation>Zimbabwe</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="state-territory">
+				<xs:annotation>
+					<xs:documentation>ARCA standard  State and Territory codes</xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="ACT">
+						<xs:annotation>
+							<xs:documentation>Australian Capital Territory</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="NSW">
+						<xs:annotation>
+							<xs:documentation>New South Wales</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="NT">
+						<xs:annotation>
+							<xs:documentation>Northern Territory</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="NZ">
+						<xs:annotation>
+							<xs:documentation>New Zealand</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="OS">
+						<xs:annotation>
+							<xs:documentation>Overseas (except Other States or Territories of Australia or New Zealand)</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="OTH">
+						<xs:annotation>
+							<xs:documentation>Other, Australian Antarctic Territory</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="QLD">
+						<xs:annotation>
+							<xs:documentation>Queensland</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SA">
+						<xs:annotation>
+							<xs:documentation>South Australia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TAS">
+						<xs:annotation>
+							<xs:documentation>Tasmania</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="VIC">
+						<xs:annotation>
+							<xs:documentation>Victoria</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="WA">
+						<xs:annotation>
+							<xs:documentation>Western Australia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="street-type">
+				<xs:annotation>
+					<xs:documentation>Australia Post street type address standard abreviations</xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="ACCS">
+						<xs:annotation>
+							<xs:documentation>Access</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ALLY">
+						<xs:annotation>
+							<xs:documentation>Alley</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ALWY">
+						<xs:annotation>
+							<xs:documentation>Alleyway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="AMBL">
+						<xs:annotation>
+							<xs:documentation>Amble</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ANCG">
+						<xs:annotation>
+							<xs:documentation>Anchorage</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="APP">
+						<xs:annotation>
+							<xs:documentation>Approach</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ARC">
+						<xs:annotation>
+							<xs:documentation>Arcade</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ART">
+						<xs:annotation>
+							<xs:documentation>Artery</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="AVE">
+						<xs:annotation>
+							<xs:documentation>Avenue</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BASN">
+						<xs:annotation>
+							<xs:documentation>Basin</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BCH">
+						<xs:annotation>
+							<xs:documentation>Beach</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BEND">
+						<xs:annotation>
+							<xs:documentation>Bend</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BLK">
+						<xs:annotation>
+							<xs:documentation>Block</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BVD">
+						<xs:annotation>
+							<xs:documentation>Boulevard</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BRCE">
+						<xs:annotation>
+							<xs:documentation>Brace</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BRAE">
+						<xs:annotation>
+							<xs:documentation>Brae</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BRK">
+						<xs:annotation>
+							<xs:documentation>Break</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BDGE">
+						<xs:annotation>
+							<xs:documentation>Bridge</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BDWY">
+						<xs:annotation>
+							<xs:documentation>Broadway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BROW">
+						<xs:annotation>
+							<xs:documentation>Brow</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BYPA">
+						<xs:annotation>
+							<xs:documentation>Bypass</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="BYWY">
+						<xs:annotation>
+							<xs:documentation>Byway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CAUS">
+						<xs:annotation>
+							<xs:documentation>Causeway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CTR">
+						<xs:annotation>
+							<xs:documentation>Centre</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CNWY">
+						<xs:annotation>
+							<xs:documentation>Centreway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CH">
+						<xs:annotation>
+							<xs:documentation>Chase</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CIR">
+						<xs:annotation>
+							<xs:documentation>Circle</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CLT">
+						<xs:annotation>
+							<xs:documentation>Circlet</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CCT">
+						<xs:annotation>
+							<xs:documentation>Circuit</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CRCS">
+						<xs:annotation>
+							<xs:documentation>Circus</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CL">
+						<xs:annotation>
+							<xs:documentation>Close</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CLDE">
+						<xs:annotation>
+							<xs:documentation>Colonnade</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CMMN">
+						<xs:annotation>
+							<xs:documentation>Common</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CON">
+						<xs:annotation>
+							<xs:documentation>Concourse</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CPS">
+						<xs:annotation>
+							<xs:documentation>Copse</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CNR">
+						<xs:annotation>
+							<xs:documentation>Corner</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CSO">
+						<xs:annotation>
+							<xs:documentation>Corso</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CT">
+						<xs:annotation>
+							<xs:documentation>Court</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CTYD">
+						<xs:annotation>
+							<xs:documentation>Courtyard</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="COVE">
+						<xs:annotation>
+							<xs:documentation>Cove</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CRES">
+						<xs:annotation>
+							<xs:documentation>Crescent</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CRST">
+						<xs:annotation>
+							<xs:documentation>Crest</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CRSS">
+						<xs:annotation>
+							<xs:documentation>Cross</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CRSG">
+						<xs:annotation>
+							<xs:documentation>Crossing</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CRD">
+						<xs:annotation>
+							<xs:documentation>Crossroad</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="COWY">
+						<xs:annotation>
+							<xs:documentation>Crossway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CUWY">
+						<xs:annotation>
+							<xs:documentation>Cruiseway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CDS">
+						<xs:annotation>
+							<xs:documentation>Cul-de-sac</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CTTG">
+						<xs:annotation>
+							<xs:documentation>Cutting</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="DALE">
+						<xs:annotation>
+							<xs:documentation>Dale</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="DELL">
+						<xs:annotation>
+							<xs:documentation>Dell</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="DEVN">
+						<xs:annotation>
+							<xs:documentation>Deviation</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="DIP">
+						<xs:annotation>
+							<xs:documentation>Dip</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="DSTR">
+						<xs:annotation>
+							<xs:documentation>Distributor</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="DR">
+						<xs:annotation>
+							<xs:documentation>Drive</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="DRWY">
+						<xs:annotation>
+							<xs:documentation>Driveway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="EDGE">
+						<xs:annotation>
+							<xs:documentation>Edge</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ELB">
+						<xs:annotation>
+							<xs:documentation>Elbow</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="END">
+						<xs:annotation>
+							<xs:documentation>End</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ENT">
+						<xs:annotation>
+							<xs:documentation>Entrance</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ESP">
+						<xs:annotation>
+							<xs:documentation>Esplanade</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="EST">
+						<xs:annotation>
+							<xs:documentation>Estate</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="EXP">
+						<xs:annotation>
+							<xs:documentation>Expressway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="EXTN">
+						<xs:annotation>
+							<xs:documentation>Extension</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="FAWY">
+						<xs:annotation>
+							<xs:documentation>Fairway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="FTRK">
+						<xs:annotation>
+							<xs:documentation>Fire Track</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="FITR">
+						<xs:annotation>
+							<xs:documentation>Fire Trail</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="FLAT">
+						<xs:annotation>
+							<xs:documentation>Flat</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="FOLW">
+						<xs:annotation>
+							<xs:documentation>Follow</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="FTWY">
+						<xs:annotation>
+							<xs:documentation>Footway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="FSHR">
+						<xs:annotation>
+							<xs:documentation>Foreshore</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="FORM">
+						<xs:annotation>
+							<xs:documentation>Formation</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="FWY">
+						<xs:annotation>
+							<xs:documentation>Freeway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="FRNT">
+						<xs:annotation>
+							<xs:documentation>Front</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="FRTG">
+						<xs:annotation>
+							<xs:documentation>Frontage</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GAP">
+						<xs:annotation>
+							<xs:documentation>Gap</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GDN">
+						<xs:annotation>
+							<xs:documentation>Garden</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GDNS">
+						<xs:annotation>
+							<xs:documentation>Gardens</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GTE">
+						<xs:annotation>
+							<xs:documentation>Gate</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GTES">
+						<xs:annotation>
+							<xs:documentation>Gates</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GLD">
+						<xs:annotation>
+							<xs:documentation>Glade</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GLEN">
+						<xs:annotation>
+							<xs:documentation>Glen</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GRA">
+						<xs:annotation>
+							<xs:documentation>Grange</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GRN">
+						<xs:annotation>
+							<xs:documentation>Green</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GRND">
+						<xs:annotation>
+							<xs:documentation>Ground</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GR">
+						<xs:annotation>
+							<xs:documentation>Grove</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="GLY">
+						<xs:annotation>
+							<xs:documentation>Gully</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="HTS">
+						<xs:annotation>
+							<xs:documentation>Heights</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="HRD">
+						<xs:annotation>
+							<xs:documentation>Highroad</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="HWY">
+						<xs:annotation>
+							<xs:documentation>Highway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="HILL">
+						<xs:annotation>
+							<xs:documentation>Hill</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="INTG">
+						<xs:annotation>
+							<xs:documentation>Interchange</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="INTN">
+						<xs:annotation>
+							<xs:documentation>Intersection</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="JNC">
+						<xs:annotation>
+							<xs:documentation>Junction</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="KEY">
+						<xs:annotation>
+							<xs:documentation>Key</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="LDG">
+						<xs:annotation>
+							<xs:documentation>Landing</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="LANE">
+						<xs:annotation>
+							<xs:documentation>Lane</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="LNWY">
+						<xs:annotation>
+							<xs:documentation>Laneway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="LEES">
+						<xs:annotation>
+							<xs:documentation>Lees</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="LNE">
+						<xs:annotation>
+							<xs:documentation>Line</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="LINK">
+						<xs:annotation>
+							<xs:documentation>Link</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="LT">
+						<xs:annotation>
+							<xs:documentation>Little</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="LKT">
+						<xs:annotation>
+							<xs:documentation>Lookout</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="LOOP">
+						<xs:annotation>
+							<xs:documentation>Loop </xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="LWR">
+						<xs:annotation>
+							<xs:documentation>Lower</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MALL">
+						<xs:annotation>
+							<xs:documentation>Mall</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MNDR">
+						<xs:annotation>
+							<xs:documentation>Meander</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MEW">
+						<xs:annotation>
+							<xs:documentation>Mew</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MEWS">
+						<xs:annotation>
+							<xs:documentation>Mews</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MWY">
+						<xs:annotation>
+							<xs:documentation>Motorway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MT">
+						<xs:annotation>
+							<xs:documentation>Mount</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="NOOK">
+						<xs:annotation>
+							<xs:documentation>Nook</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="OTLK">
+						<xs:annotation>
+							<xs:documentation>Outlook</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PDE">
+						<xs:annotation>
+							<xs:documentation>Parade</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PARK">
+						<xs:annotation>
+							<xs:documentation>Park</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PKLD">
+						<xs:annotation>
+							<xs:documentation>Parklands</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PKWY">
+						<xs:annotation>
+							<xs:documentation>Parkway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PART">
+						<xs:annotation>
+							<xs:documentation>Part</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PASS">
+						<xs:annotation>
+							<xs:documentation>Pass</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PATH">
+						<xs:annotation>
+							<xs:documentation>Path</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PHWY">
+						<xs:annotation>
+							<xs:documentation>Pathway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PIAZ">
+						<xs:annotation>
+							<xs:documentation>Piazza</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PL">
+						<xs:annotation>
+							<xs:documentation>Place</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PLAT">
+						<xs:annotation>
+							<xs:documentation>Plateau</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PLZA">
+						<xs:annotation>
+							<xs:documentation>Plaza</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PKT">
+						<xs:annotation>
+							<xs:documentation>Pocket</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PNT">
+						<xs:annotation>
+							<xs:documentation>Point</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PORT">
+						<xs:annotation>
+							<xs:documentation>Port</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PROM">
+						<xs:annotation>
+							<xs:documentation>Promenade</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="QUAD">
+						<xs:annotation>
+							<xs:documentation>Quad</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="QDGL">
+						<xs:annotation>
+							<xs:documentation>Quadrangle</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="QDRT">
+						<xs:annotation>
+							<xs:documentation>Quadrant</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="QY">
+						<xs:annotation>
+							<xs:documentation>Quay</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="QYS">
+						<xs:annotation>
+							<xs:documentation>Quays</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RMBL">
+						<xs:annotation>
+							<xs:documentation>Ramble</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RAMP">
+						<xs:annotation>
+							<xs:documentation>Ramp</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RNGE">
+						<xs:annotation>
+							<xs:documentation>Range</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RCH">
+						<xs:annotation>
+							<xs:documentation>Reach</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RES">
+						<xs:annotation>
+							<xs:documentation>Reserve</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="REST">
+						<xs:annotation>
+							<xs:documentation>Rest</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RTT">
+						<xs:annotation>
+							<xs:documentation>Retreat</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RIDE">
+						<xs:annotation>
+							<xs:documentation>Ride</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RDGE">
+						<xs:annotation>
+							<xs:documentation>Ridge</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RGWY">
+						<xs:annotation>
+							<xs:documentation>Ridgeway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ROWY">
+						<xs:annotation>
+							<xs:documentation>Right of Way</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RING">
+						<xs:annotation>
+							<xs:documentation>Ring</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RISE">
+						<xs:annotation>
+							<xs:documentation>Rise</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RVR">
+						<xs:annotation>
+							<xs:documentation>River</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RVWY">
+						<xs:annotation>
+							<xs:documentation>Riverway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RVRA">
+						<xs:annotation>
+							<xs:documentation>Riviera </xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RD">
+						<xs:annotation>
+							<xs:documentation>Road</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RDS">
+						<xs:annotation>
+							<xs:documentation>Roads</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RDSD">
+						<xs:annotation>
+							<xs:documentation>Roadside</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RDWY">
+						<xs:annotation>
+							<xs:documentation>Roadway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RSBL">
+						<xs:annotation>
+							<xs:documentation>Rosebowl</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RTY">
+						<xs:annotation>
+							<xs:documentation>Rotary</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RNDE">
+						<xs:annotation>
+							<xs:documentation>Round</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RTE">
+						<xs:annotation>
+							<xs:documentation>Route</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ROW">
+						<xs:annotation>
+							<xs:documentation>Row</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RUE">
+						<xs:annotation>
+							<xs:documentation>Rue</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RUN">
+						<xs:annotation>
+							<xs:documentation>Run</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SWY">
+						<xs:annotation>
+							<xs:documentation>Service Way</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SDNG">
+						<xs:annotation>
+							<xs:documentation>Siding</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SLPE">
+						<xs:annotation>
+							<xs:documentation>Slope</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SND">
+						<xs:annotation>
+							<xs:documentation>Sound</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SPUR">
+						<xs:annotation>
+							<xs:documentation>Spur</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SQ">
+						<xs:annotation>
+							<xs:documentation>Square</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="STRS">
+						<xs:annotation>
+							<xs:documentation>Stairs</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SHWY">
+						<xs:annotation>
+							<xs:documentation>State Highway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="STPS">
+						<xs:annotation>
+							<xs:documentation>Steps</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="STRA">
+						<xs:annotation>
+							<xs:documentation>Strand</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ST">
+						<xs:annotation>
+							<xs:documentation>Street</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="STRP">
+						<xs:annotation>
+							<xs:documentation>Strip</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SBWY">
+						<xs:annotation>
+							<xs:documentation>Subway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TARN">
+						<xs:annotation>
+							<xs:documentation>Tarn</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TCE">
+						<xs:annotation>
+							<xs:documentation>Terrace</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="THOR">
+						<xs:annotation>
+							<xs:documentation>Thoroughfare</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TLWY">
+						<xs:annotation>
+							<xs:documentation>Tollway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TOP">
+						<xs:annotation>
+							<xs:documentation>Top</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TOR">
+						<xs:annotation>
+							<xs:documentation>Tor</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TWRS">
+						<xs:annotation>
+							<xs:documentation>Towers</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TRK">
+						<xs:annotation>
+							<xs:documentation>Track</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TRL">
+						<xs:annotation>
+							<xs:documentation>Trail</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TRLR">
+						<xs:annotation>
+							<xs:documentation>Trailer</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TRI">
+						<xs:annotation>
+							<xs:documentation>Triangle</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TKY">
+						<xs:annotation>
+							<xs:documentation>Trunkway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TURN">
+						<xs:annotation>
+							<xs:documentation>TURN</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="UPAS">
+						<xs:annotation>
+							<xs:documentation>Underpass</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="UPR">
+						<xs:annotation>
+							<xs:documentation>Upper</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="VALE">
+						<xs:annotation>
+							<xs:documentation>Vale</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="VDCT">
+						<xs:annotation>
+							<xs:documentation>Viaduct</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="VIEW">
+						<xs:annotation>
+							<xs:documentation>View</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="VLLS">
+						<xs:annotation>
+							<xs:documentation>Villas</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="VSTA">
+						<xs:annotation>
+							<xs:documentation>Vista </xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="WADE">
+						<xs:annotation>
+							<xs:documentation>Wade</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="WALK">
+						<xs:annotation>
+							<xs:documentation>Walk</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="WKWY">
+						<xs:annotation>
+							<xs:documentation>Walkway</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="WAY">
+						<xs:annotation>
+							<xs:documentation>Way</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="WHRF">
+						<xs:annotation>
+							<xs:documentation>Wharf</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="WYND">
+						<xs:annotation>
+							<xs:documentation>Wynd</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="YARD">
+						<xs:annotation>
+							<xs:documentation>Yard</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="state-territory-land-registry">
+				<xs:annotation>
+					<xs:documentation>A list of the State and Territory Land Title Registry offices.</xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="ACT">
+						<xs:annotation>
+							<xs:documentation>Australian Capital Territory</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="NSW">
+						<xs:annotation>
+							<xs:documentation>New South Wales</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="NT">
+						<xs:annotation>
+							<xs:documentation>Northern Territory</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="QLD">
+						<xs:annotation>
+							<xs:documentation>Queensland</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SA">
+						<xs:annotation>
+							<xs:documentation>South Australia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TAS">
+						<xs:annotation>
+							<xs:documentation>Tasmania</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="VIC">
+						<xs:annotation>
+							<xs:documentation>Victoria</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="WA">
+						<xs:annotation>
+							<xs:documentation>Western Australia</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="nsw-business-purpose">
+				<xs:annotation>
+					<xs:documentation>Descriptor of the business purpose for the search, e.g. Conveyancing or Government services. NSW Land Title Office require a Business Purpose to be identified prior to completing a name search.</xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="Land development">
+						<xs:annotation>
+							<xs:documentation>Land development</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Historical Research">
+						<xs:annotation>
+							<xs:documentation>Historical Research</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Conveyancing">
+						<xs:annotation>
+							<xs:documentation>Conveyancing</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Land management">
+						<xs:annotation>
+							<xs:documentation>Land management</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Government services">
+						<xs:annotation>
+							<xs:documentation>Government services</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Other">
+						<xs:annotation>
+							<xs:documentation>Other</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="mode">
+				<xs:annotation>
+					<xs:documentation>Indicates whether the state that the ordered document/report is Online or Offline.</xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="Online">
+						<xs:annotation>
+							<xs:documentation>Online</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Offline">
+						<xs:annotation>
+							<xs:documentation>Offline</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="doc-status">
+				<xs:annotation>
+					<xs:documentation>Details about the status of the document ordered.</xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="PENDING">
+						<xs:annotation>
+							<xs:documentation>Document not ready to be received (used if polling model adopted and the document has not yet been returned from the Land Titles Office)</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="READY">
+						<xs:annotation>
+							<xs:documentation>Document ready to be delivered</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="EXPIRED">
+						<xs:annotation>
+							<xs:documentation>Document search cannot be completed in 4 days (online states ONLY)</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TIMEOUT ">
+						<xs:annotation>
+							<xs:documentation>Connectivity error with land title office</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="FAILURE">
+						<xs:annotation>
+							<xs:documentation>General failure condition encountered by the land title office</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ACK">
+						<xs:annotation>
+							<xs:documentation>Acts as final ACK and trigger for calling Deliver Document operation (only used in callback model)</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="uuid">
+				<xs:annotation>
+					<xs:documentation>Veda UUID</xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:token">
+					<xs:length value="18"/>
+					<xs:pattern value="[0-9]{6}-[A-Z0-9]{5}-[A-Z0-9]{5}"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="positive-decimal">
+				<xs:annotation>
+					<xs:documentation>The positive-decimal type specifies a positive decimal value.</xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:decimal">
+					<xs:minExclusive value="0"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:element name="client-references" type="lt:client-references">
+				<xs:annotation>
+					<xs:documentation>Client defined reference fields</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:complexType name="notes-type">
+				<xs:annotation>
+					<xs:documentation>Container for additional/miscellaneous notes not covered by one of the existing elements within the "search-info" section of land title extract.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="note" type="xs:string" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Free form note text</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="dealing-type">
+				<xs:annotation>
+					<xs:documentation>Details a document evidencing a land transaction</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="document-type" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Document type</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="dealing-number" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The number associated with the document (format is alphanumeric)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="instrument-item-type">
+				<xs:annotation>
+					<xs:documentation>Document in writing relating to the disposition, devolution or acquisition of land or evidencing title thereto</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="dealing-number" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The number associated with the instrument (format is alphanumeric) and may not always be a single entry - i.e PS438893N Stage 4</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="lodgement-date" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Instrument lodgement date - note that the date may be both date and time.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="volume-folio-type">
+				<xs:annotation>
+					<xs:documentation>Identifier for a parcel of land consisting of Volume/Folio- e.g title-reference used in VIC only</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="volume-reference" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The Volume reference</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="folio-reference" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The Folio reference</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="diagnostics-type">
+				<xs:annotation>
+					<xs:documentation>Container for list of diagnostics holding unrecognised element detail(s).</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="diagnostic" type="xs:string" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Contains the full text (as presented in the Land Title extract) that failed to be parsed based on the known set of parsing rules.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="nsw-fielded-data">
+				<xs:annotation>
+					<xs:documentation>Container for NSW fielded data - consists of 2 parts, search-info and report-info.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="search-info" type="lt:nsw-search-info-type" minOccurs="0"/>
+						<xs:element name="report-info" type="lt:nsw-report-info-type" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:complexType name="nsw-search-info-type">
+				<xs:annotation>
+					<xs:documentation>Search data provided at the beginning of the Land Title extract.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="title-reference" type="xs:string" minOccurs="0"/>
+					<xs:element name="search-date-time" type="xs:string" minOccurs="0"/>
+					<xs:element name="date-created" type="xs:string" minOccurs="0"/>
+					<xs:element name="edition-number" type="xs:string" minOccurs="0"/>
+					<xs:element name="additional-notes" type="lt:notes-type" minOccurs="0"/>
+					<xs:element name="footer" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Search data provided at the end of the Land Title extract.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="requested-by" type="xs:string" minOccurs="0"/>
+								<xs:element name="requested-on" type="xs:string" minOccurs="0"/>
+								<xs:element name="copyright-info" type="xs:string" minOccurs="0"/>
+								<xs:element name="disclaimer" type="xs:string" minOccurs="0"/>
+								<xs:element name="footnote-text" type="xs:string" minOccurs="0"/>
+								<xs:element name="warning" type="xs:string" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="search-title" fixed="LAND AND PROPERTY INFORMATION NEW SOUTH WALES - TITLE SEARCH"/>
+			</xs:complexType>
+			<xs:complexType name="nsw-report-info-type">
+				<xs:annotation>
+					<xs:documentation>Container for the land title extract with each subsection/heading provided as a separate data structure.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="land-description" type="lt:nsw-land-description-type" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Data provided below "LAND" heading.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="registered-owner" type="lt:nsw-registered-owner-type" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Data provided below "FIRST SCHEDULE" heading.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="registered-dealings" type="lt:nsw-registered-dealings-type" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Data provided below "SECOND SCHEDULE" heading.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="unit-entitlements" type="lt:nsw-unit-entitlements-type" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Data provided below "SCHEDULE OF UNIT ENTITLEMENT" heading - Used for Common Property (CP) plan types only.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="notations" type="lt:nsw-notations-type" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Data provided below "NOTATIONS" heading.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="parcel-schedule" type="lt:nsw-parcel-schedules-type" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Data provided below "SCHEDULE OF PARCELS" heading - Used for AUTO CONSOL folios only.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="nsw-land-description-type">
+				<xs:annotation>
+					<xs:documentation>Container for the NSW land description section.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="lot-plan" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The description of land parcels or areas of subdivision within a deposited (DP) or strata plan (SP). For Common Property (CP) in a strata scheme, it is all the areas of land and buildings not included in any lot. The property is owned jointly by all the unit owners in each strata. Takes the form "land-type" "lot-number" "plan-type" "plan-number".</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="land-type" type="xs:string" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Set to "LOT" for Strata Plan (SP)/Deposited Plan (DP) (as well as COMMUNITY PLAN) Plan Types. Set to "THE COMMON PROPERTY IN THE STRATA SCHEME" for Common Property(CP) Plan Type - also trailing text of "WITHIN THE PARCEL SHOWN IN THE TITLE DIAGRAM". Set to "LAND DESCRIBED IN SCHEDULE OF PARCELS" for AUTO CONSOL folios.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="lot-number" type="xs:string" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Property Lot Number. Not used for CP or AUTO CONSOL folios.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="plan-type" type="xs:string" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Set to either "DEPOSITED PLAN" (for SP) or "STRATA PLAN" (for SP/CP). Not used for AUTO CONSOL folios.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="plan-number" type="xs:string" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Property Plan Number. Not used for AUTO CONSOL folios.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="location-reference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Takes the form "suburb" / "local-government-area" / "parish" "county" (multiple) / "portion" / "title-diagram".</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="suburb" type="xs:string" minOccurs="0"/>
+								<xs:element name="local-government-area" type="xs:string" minOccurs="0"/>
+								<xs:element name="land-division" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Container for list of parish and county subdivisions.</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="parish" type="xs:string" minOccurs="0"/>
+											<xs:element name="county" type="xs:string" minOccurs="0"/>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="portion" type="xs:string" minOccurs="0"/>
+								<xs:element name="title-diagram" type="xs:string" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Set to "SEE SCHEDULE OF PARCELS" for Auto Consol folios.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="label" fixed="LAND"/>
+			</xs:complexType>
+			<xs:complexType name="nsw-registered-owner-type">
+				<xs:annotation>
+					<xs:documentation>Container for the NSW registered owner section. Sets out the ownership and estate details (names of the registered proprietors, shares etc).2 variations are provided, details for Plan Type = DP/SP (deposited-plan-strata-plan)and Plan Type = CP (common-property).</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:choice>
+						<xs:element name="deposited-plan-strata-plan" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="tenancy-group" minOccurs="0" maxOccurs="unbounded">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="registered-party" minOccurs="0" maxOccurs="unbounded">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="party-name" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+															<xs:element name="share-split" type="xs:string" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>Share split following the name of each party name e.g 31/32 SHARE.</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+											<xs:attribute name="tenancy-group-type" type="xs:string" use="optional">
+												<xs:annotation>
+													<xs:documentation>Tenancy group type e.g TENANTS IN COMMON IN EQUAL SHARES. If the share split is equal (i.e IN EQUAL SHARES) then it appears for the group. If the share split is not equal then each party name will have their share split defined above (as part of the registered-party).</xs:documentation>
+												</xs:annotation>
+											</xs:attribute>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="document-transfer" type="lt:dealing-type" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Appears as part of the party-name for single entry and on the "tenancy-group-type" relationship if more than 1.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="common-property" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="strata-plan-owner" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Prefixed with "THE OWNERS - STRATA PLAN NO." label.</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="plan-number" type="xs:string" minOccurs="0"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="service-of-notices-address" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Prefixed with "ADDRESS FOR SERVICE OF NOTICES:" label.</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="address-line-1" type="xs:string" minOccurs="0"/>
+												<xs:element name="address-line-2" type="xs:string" minOccurs="0"/>
+												<xs:element name="address-line-3" type="xs:string" minOccurs="0"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:choice>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="label" fixed="FIRST SCHEDULE"/>
+			</xs:complexType>
+			<xs:complexType name="nsw-registered-dealings-type">
+				<xs:annotation>
+					<xs:documentation>Container for the NSW registered dealings section.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="registered-dealing" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>The part of a title which lists reservations and conditions, exceptions, restrictions, easements and other interests or notifications affecting the land.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="footnote-indicator" type="xs:string" minOccurs="0"/>
+								<xs:element name="item-number" type="xs:string" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Dealing item number (contiguous starting from 1).</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="dealing-number" type="xs:string" minOccurs="0"/>
+								<xs:element name="description" type="xs:string" minOccurs="0"/>
+								<xs:element name="grouped-dealing" minOccurs="0" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="footnote-indicator" type="xs:string" minOccurs="0"/>
+											<xs:element name="dealing-number" type="xs:string" minOccurs="0"/>
+											<xs:element name="description" type="xs:string" minOccurs="0"/>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="label" fixed="SECOND SCHEDULE"/>
+				<xs:attribute name="notifications-label" fixed="NOTIFICATIONS"/>
+				<xs:attribute name="notifications-number" type="xs:string"/>
+			</xs:complexType>
+			<xs:complexType name="nsw-unit-entitlements-type">
+				<xs:annotation>
+					<xs:documentation>Container for the NSW unit entitlements section.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="unit-entitlement" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A schedule on community and strata plans listing the individual entitlement of every lot in the scheme. Used to apportion voting rights etc to registered proprietors.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="strata-plan" minOccurs="0">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="plan-number" type="xs:string" minOccurs="0"/>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="lot-entitlement" minOccurs="0" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="lot-number" type="xs:string" minOccurs="0"/>
+											<xs:element name="entitlement" type="xs:string" minOccurs="0"/>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="label" fixed="SCHEDULE OF UNIT ENTITLEMENT"/>
+				<xs:attribute name="aggregate-label" fixed="AGGREGATE:"/>
+				<xs:attribute name="aggregate-number" type="xs:string"/>
+			</xs:complexType>
+			<xs:complexType name="nsw-notations-type">
+				<xs:annotation>
+					<xs:documentation>Container for the NSW notations section.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="notation" minOccurs="0" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="dealing-number" type="xs:string" minOccurs="0"/>
+								<xs:element name="note" type="xs:string" minOccurs="0"/>
+							</xs:sequence>
+							<xs:attribute name="label" fixed="NOTE:"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="unregistered-dealings" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Container for the NSW unregistered dealings.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="unregistered-dealing" type="lt:dealing-type" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>A notification on title about a dealing which has been lodged but not yet been registered.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+							<xs:attribute name="label" fixed="UNREGISTERED DEALINGS:"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="label" fixed="NOTATIONS"/>
+			</xs:complexType>
+			<xs:complexType name="nsw-parcel-schedules-type">
+				<xs:annotation>
+					<xs:documentation>Container for the NSW parcel schedules section.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="parcel-schedule" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Container for Schedule Of Parcels being the lots or portion numbers and title diagram plan numbers of all the parcels of land contained in the Auto consol folio. All schedules have the format of LOT "lot-number" IN "plan-number". All title-diagrams have the format of CROWN-PLAN "title-plan-number".</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="schedule" type="xs:string" minOccurs="0"/>
+								<xs:element name="title-diagram" type="xs:string" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="label" fixed="SCHEDULE OF PARCELS / TITLE DIAGRAM"/>
+			</xs:complexType>
+			<xs:element name="vic-fielded-data">
+				<xs:annotation>
+					<xs:documentation>Container for VIC fielded data - consists of 2 parts, search-info and report-info.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="search-info" type="lt:vic-search-info-type" minOccurs="0"/>
+						<xs:element name="report-info" type="lt:vic-report-info-type" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:complexType name="vic-search-info-type">
+				<xs:annotation>
+					<xs:documentation>Search data provided at the beginning of the Land Title extract.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="title-reference" type="lt:volume-folio-type" minOccurs="0"/>
+					<xs:element name="search-date-time" type="xs:string" minOccurs="0"/>
+					<xs:element name="requester" type="xs:string" minOccurs="0"/>
+					<xs:element name="security-number" type="xs:string" minOccurs="0"/>
+					<xs:element name="copyright-info" type="xs:string" minOccurs="0"/>
+					<xs:element name="additional-notes" type="lt:notes-type" minOccurs="0"/>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="search-title" fixed="REGISTER SEARCH STATEMENT (Title Search) Transfer of Land Act 1958"/>
+			</xs:complexType>
+			<xs:complexType name="vic-report-info-type">
+				<xs:annotation>
+					<xs:documentation>Container for the land title extract with each subsection/heading provided as a separate data structure.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="land-description" type="lt:vic-land-description-type" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Data provided below "LAND DESCRIPTION" heading.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="registered-proprietor" type="lt:vic-registered-proprietor-type" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Data provided below "REGISTERED PROPRIETOR" heading.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="encumberances-caveats-notices" type="lt:vic-encumberances-caveats-notices-type" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Data provided below "ENCUMBRANCES, CAVEATS AND NOTICES" heading.
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="diagram-location" type="lt:vic-diagram-location-type" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Data provided below "DIAGRAM LOCATION heading.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="activities" type="lt:vic-recent-activities-type" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Data provided below "ACTIVITY IN THE LAST 125 DAYS" heading.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="additional-information" type="lt:vic-additional-information-type" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Data provided below "END OF REGISTER SEARCH STATEMENT" label at the end  of the land titles extract.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="vic-land-description-type">
+				<xs:annotation>
+					<xs:documentation>Container for the VIC land description section.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="description" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Free form land description.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="parent-titles" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Associated parent title(s) can be defined as either a list of parent volume/ folios or a range of parent volume/ folios (with start and end) and/or both..</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="list" type="lt:volume-folio-type" minOccurs="0" maxOccurs="unbounded"/>
+								<xs:element name="range" minOccurs="0" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="start" type="lt:volume-folio-type" minOccurs="0"/>
+											<xs:element name="end" type="lt:volume-folio-type" minOccurs="0"/>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="created-by-application" type="lt:instrument-item-type" minOccurs="0"/>
+					<xs:element name="created-by-instrument" type="lt:instrument-item-type" minOccurs="0"/>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="label" fixed="LAND DESCRIPTION"/>
+			</xs:complexType>
+			<xs:complexType name="vic-registered-proprietor-type">
+				<xs:annotation>
+					<xs:documentation>Container for the VIC registered proprietor section. Includes the person(s) seized or possessed of the freehold or other estate or interest in land and recorded on the title as being the owner.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="estate" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Interest in the land e.g. "Estate Fee Simple".</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="tenancy-group" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Grouping of tenancy based on tenancy-group-type.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="registered-party" minOccurs="0" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="share-split" type="xs:string" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Proprietor share split.</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="proprietor-type" type="xs:string" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>The person(s) seized or possessed of the freehold or other estate or interest in land and recorded on the title as being the owner.</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="party-name" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Registered proprietor name.</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="address" type="xs:string" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Registered proprietor(s) address.</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+							<xs:attribute name="tenancy-group-type" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>Tenancy group name e.g."TENANTS IN COMMON".</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="refer-instrument" type="lt:instrument-item-type" minOccurs="0"/>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="label" fixed="REGISTERED PROPRIETOR"/>
+			</xs:complexType>
+			<xs:complexType name="vic-encumberances-caveats-notices-type">
+				<xs:annotation>
+					<xs:documentation>Container for the VIC encumbrances caveats and notices section.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="encumberance-caveat-notice" minOccurs="0" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="type" type="xs:string" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Type of interest associated with the registered land.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="item" type="lt:instrument-item-type" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Instrument item (dealing number/lodgement date)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="description" type="xs:string" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Detailed commentary of the associated interest.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="notes" type="lt:notes-type" minOccurs="0"/>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="label" fixed="ENCUMBRANCES, CAVEATS AND NOTICES"/>
+			</xs:complexType>
+			<xs:complexType name="vic-diagram-location-type">
+				<xs:annotation>
+					<xs:documentation>Container for the VIC diagram location section.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="title-diagram" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Title diagram dealing number reference.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="label" fixed="DIAGRAM LOCATION"/>
+			</xs:complexType>
+			<xs:complexType name="vic-recent-activities-type">
+				<xs:annotation>
+					<xs:documentation>Container for the VIC recent activities section.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="recent-activity" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Container with specific details of land's recent activities.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="activity-item" type="lt:instrument-item-type" minOccurs="0"/>
+								<xs:element name="activity" type="xs:string" minOccurs="0"/>
+								<xs:element name="status" type="xs:string" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="see-folio" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Appears when the label "THIS FOLIO HAS BEEN CANCELLED" is present and includes list of folios to refer to.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="folio" type="lt:volume-folio-type" minOccurs="0"/>
+								<xs:element name="status" type="xs:string" minOccurs="0"/>
+								<xs:element name="land-description" type="xs:string" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="label" fixed="ACTIVITY IN THE LAST 125 DAYS"/>
+			</xs:complexType>
+			<xs:complexType name="vic-additional-information-type">
+				<xs:annotation>
+					<xs:documentation>Container for the VIC additional information. Includes details for administrative-notices and owners-corporation</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="other-titles" type="lt:volume-folio-type" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Other titles with interest affecting the fee simple in this land.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="street-address" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Street Address</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="administrative-notices" type="lt:vic-administrative-notices-type" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Data provided below "ADMINISTRATIVE NOTICES" heading.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="owners-corporations" type="lt:vic-owners-corporations-type" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Data provided below "OWNERS CORPORATIONS" heading.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="vic-administrative-notices-type">
+				<xs:annotation>
+					<xs:documentation>Container for VIC administrative notices.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="administrative-notice" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Container with specific details of land's administrative notices.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="notice-item" type="lt:instrument-item-type" minOccurs="0"/>
+								<xs:element name="notice" type="xs:string" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="ect-control" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Electronic Certificate of Title (eCT) details.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="control-name" type="xs:string" minOccurs="0"/>
+								<xs:element name="effective-date" type="xs:string" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="label" fixed="ADMINISTRATIVE NOTICES"/>
+			</xs:complexType>
+			<xs:complexType name="vic-owners-corporations-type">
+				<xs:annotation>
+					<xs:documentation>Container for VIC owners corporations.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="owner-corporation" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Container with specific details of land's owner-corporation.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="bc-number" type="xs:string" minOccurs="0"/>
+								<xs:element name="plan-number" type="xs:string" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="label" fixed="OWNERS CORPORATIONS"/>
+			</xs:complexType>
+			<xs:element name="qld-fielded-data">
+				<xs:annotation>
+					<xs:documentation>Container for QLD fielded data - consists of 2 parts, search-info and report-info.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="search-info" type="lt:qld-search-info-type" minOccurs="0"/>
+						<xs:element name="report-info" type="lt:qld-report-info-type" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:complexType name="qld-search-info-type">
+				<xs:annotation>
+					<xs:documentation>Search data provided at the beginning of the Land Title extract.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="title-reference" type="xs:string" minOccurs="0"/>
+					<xs:element name="search-date-time" type="xs:string" minOccurs="0"/>
+					<xs:element name="previous-title-reference" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="date-created" type="xs:string" minOccurs="0"/>
+					<xs:element name="title-status-desc" type="xs:string" minOccurs="0"/>
+					<xs:element name="footer" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Search data provided at the end of the Land Title extract.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="requester" type="xs:string" minOccurs="0"/>
+								<xs:element name="request-number" type="xs:string" minOccurs="0"/>
+								<xs:element name="copyright-info" type="xs:string" minOccurs="0"/>
+								<xs:element name="additional-notes" type="lt:notes-type" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="search-title" use="required">
+					<xs:annotation>
+						<xs:documentation>Currently set to "CURRENT TITLE SEARCH/DEPT OF NATURAL RESOURCES AND MINES, QUEENSLAND".</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="qld-report-info-type">
+				<xs:annotation>
+					<xs:documentation>Container for the land title extract with each subsection/heading provided as a separate data structure.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="registered-owner" type="lt:qld-registered-owner-type" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Prefixed with "REGISTERED OWNER" label.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="easements-incumbrances-interests" type="lt:qld-easements-encumbrances-interests-type" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Prefixed with "EASEMENTS, ENCUMBRANCES AND INTERESTS" label.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="unregistered-dealings" type="lt:qld-unregistered-dealings-type" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Prefixed with "UNREGISTERED DEALINGS" label.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="estate-land-description" type="lt:qld-estate-land-description-type" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Prefixed with either "ESTATE AND LAND" or "LAND DESCRIPTION" label.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="administrative-advices" type="lt:qld-administrative-advices-type" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Prefixed with "ADMINISTRATIVE ADVICES" label.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="title-certificate-issued" type="lt:qld-title-certificate-issued-type" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Prefixed with "CERTIFICATE OF TITLE ISSUED" label.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="qld-registered-owner-type">
+				<xs:annotation>
+					<xs:documentation>Container for QLD registered owner section. 2 variations are provided, details for land-type = "LOT" and land-type = "COMMON PROPERTY".</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="refer-instrument" type="lt:instrument-item-type" minOccurs="0"/>
+					<xs:choice>
+						<xs:element name="tenancy-group" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Grouping of tenancy based on tenancy-group-type.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="registered-party" minOccurs="0" maxOccurs="unbounded">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="party-name" type="xs:string" minOccurs="0"/>
+												<xs:element name="interest" type="xs:string" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Interest split following the tenancy-type of each party name.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="tenancy-type" type="xs:string" minOccurs="0"/>
+												<xs:element name="under-instrument" type="lt:instrument-item-type" minOccurs="0" maxOccurs="unbounded">
+													<xs:annotation>
+														<xs:documentation>Provided for tenancy-type = "TRUSTEE" or "PERSONAL REPRESENTATIVE" (under-instrument dealing-number is provided)</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+								<xs:attribute name="tenancy-group-type" type="xs:string" use="optional">
+									<xs:annotation>
+										<xs:documentation>Tenancy group name e.g TENANTS IN COMMON.</xs:documentation>
+									</xs:annotation>
+								</xs:attribute>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="common-property" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Common property registered owner details.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="plan-owner" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Prefixed with "BODY CORPORATE FOR" label.</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="cts-details" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Container for CTS (Community Title Scheme) details.</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="schema-name" type="xs:string" minOccurs="0"/>
+															<xs:element name="schema-number" type="xs:string" minOccurs="0"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="service-of-notices-address" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Container for plan owner address location.</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="address-line-1" type="xs:string" minOccurs="0"/>
+												<xs:element name="address-line-2" type="xs:string" minOccurs="0"/>
+												<xs:element name="address-line-3" type="xs:string" minOccurs="0"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:choice>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="label" fixed="REGISTERED OWNER"/>
+			</xs:complexType>
+			<xs:complexType name="qld-easements-encumbrances-interests-type">
+				<xs:annotation>
+					<xs:documentation>Container for QLD easements encumbrances interests section.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="easement-encumbrance-interest" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Container with specific details of land's easements / encumbrances / interests details.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="item-number" type="xs:string" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Interest item number (contiguous starting from 1).</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="type" type="xs:string" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Type of interest associated with the registered land.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="item" type="lt:instrument-item-type" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Instrument item (dealing number/lodgement date)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="description" type="xs:string" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Detailed commentary of the associated interest.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+							<xs:attribute name="pre-ats-number" type="xs:string" use="optional">
+								<xs:annotation>
+									<xs:documentation>Pre ATS(Automated Title System) number for dealing numbers created earlier than 1994 starting with a 6 (can still be used for dealing number search).</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="label" fixed="EASEMENTS, ENCUMBRANCES AND INTERESTS"/>
+			</xs:complexType>
+			<xs:complexType name="qld-administrative-advices-type">
+				<xs:annotation>
+					<xs:documentation>Container for QLD administrative advices section.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="administrative-advice" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Container with specific details of land's administrative advices.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="type" type="xs:string" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Type of interest associated with the registered land.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="item" type="lt:instrument-item-type" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Instrument item (dealing number/lodgement date)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="description" type="xs:string" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Detailed commentary of the associated interest.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="status" type="xs:string" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="label" fixed="ADMINISTRATIVE ADVICES"/>
+			</xs:complexType>
+			<xs:complexType name="qld-unregistered-dealings-type">
+				<xs:annotation>
+					<xs:documentation>Container for QLD unregistered dealings section.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="unregistered-dealing" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Container with specific details of land's unregistered dealings.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="type" type="xs:string" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Type of interest associated with the registered land.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="item" type="lt:instrument-item-type" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Instrument item (dealing number/lodgement date)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="description" type="xs:string" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Detailed commentary of the associated interest.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="status" type="xs:string" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="label" fixed="UNREGISTERED DEALINGS"/>
+			</xs:complexType>
+			<xs:complexType name="qld-location-reference-type">
+				<xs:annotation>
+					<xs:documentation>Container for location-reference details pertaining to the parcel of land. Takes the form "county" "parish" / "local-government".</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="county" type="xs:string" minOccurs="0"/>
+					<xs:element name="parish" type="xs:string" minOccurs="0"/>
+					<xs:element name="local-government" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="qld-estate-land-description-type">
+				<xs:annotation>
+					<xs:documentation>Container for QLD estate / land description sections.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="estate" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Set to either "Estate in Fee Simple" (Section header = "ESTATE AND LAND") or "COMMON PROPERTY OF" (Section header = "LAND DESCRIPTION").</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:choice>
+						<xs:element name="common-property" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Container for common property details pertaining to the parcel of land. Any part of a community title scheme which does not comprise part of a lot, such as common garden areas, stairways and lift.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="cts-details" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Container for CTS (Community Title Scheme) details.</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="schema-name" type="xs:string" minOccurs="0"/>
+												<xs:element name="schema-number" type="xs:string" minOccurs="0"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="location-reference" type="lt:qld-location-reference-type" minOccurs="0"/>
+									<xs:element name="cms-number" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="lot-plan" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Container for lot-plan details pertaining to the parcel of land. Takes the form "land-type" "lot-number" "plan-type" "plan-number". Not present for "COMMON PROPERTY"</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="land-type" type="xs:string" minOccurs="0"/>
+									<xs:element name="lot-number" type="xs:string" minOccurs="0"/>
+									<xs:element name="plan-type" type="xs:string" minOccurs="0"/>
+									<xs:element name="plan-number" type="xs:string" minOccurs="0"/>
+									<xs:element name="location-reference" type="lt:qld-location-reference-type" minOccurs="0"/>
+									<xs:element name="cms-number" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:choice>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="label" use="required">
+					<xs:annotation>
+						<xs:documentation>Set to either "ESTATE AND LAND" or "LAND DESCRIPTION".</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="qld-title-certificate-issued-type">
+				<xs:annotation>
+					<xs:documentation>Container for QLD title certificate issued section.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="issued" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Has title certificate been issued.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="date" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Date title certificate issued (if issued and known).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="dealing-number" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The dealing number associated with the issued title certificate (if issued and known).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="version" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Title certificate version number (if issued).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="diagnostics" type="lt:diagnostics-type" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="label" fixed="CERTIFICATE OF TITLE ISSUED"/>
+			</xs:complexType>
+			<xs:complexType name="client-references">
+				<xs:sequence>
+					<xs:element name="client-defined-1" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A customer defined reference</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="client-defined-2" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>A customer defined reference</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="customer-contact-details" type="lt:customer-contact-details">
+				<xs:annotation>
+					<xs:documentation>Contact details of the user in the event that Veda need to contact you about the search you have requested.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:complexType name="customer-contact-details">
+				<xs:sequence>
+					<xs:element name="name" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The name of the organisation</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="first-given-name" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>First Name. Also referred to as Christian Name</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="family-name" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Family Name. Also referred to as Surname</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fax-number" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Fax number</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="email" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Email address</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="phone" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Contact phone number</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="duplicate-details" type="lt:duplicate-details">
+				<xs:annotation>
+					<xs:documentation>Information pertaining to an available duplicate document</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:complexType name="duplicate-details">
+				<xs:sequence>
+					<xs:element name="date-time" type="xs:dateTime">
+						<xs:annotation>
+							<xs:documentation>Date and time that the duplicate was created</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="lt:enquiry-id" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Enquiry-id of the previously retrieved and stored duplicate document.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="lt:price-value" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The price associated with ordering the duplicate document.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="enquiry-id" type="lt:uuid">
+				<xs:annotation>
+					<xs:documentation>System generated universal unique id used in all transactions related to an document/order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="order-details" type="lt:order-details">
+				<xs:annotation>
+					<xs:documentation>Information about an ordered document.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:complexType name="order-details">
+				<xs:sequence>
+					<xs:element name="date-time" type="xs:dateTime">
+						<xs:annotation>
+							<xs:documentation>Ordered document timestamp</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="lt:enquiry-id">
+						<xs:annotation>
+							<xs:documentation>Enquiry-id (ticket number) of the ordered document.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="mode" type="lt:mode">
+						<xs:annotation>
+							<xs:documentation>Indicates whether the ordered document is for an Online or Offline state.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="price-paid" type="lt:positive-decimal">
+				<xs:annotation>
+					<xs:documentation>The price that you have been charged for this product or service.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="price-value" type="lt:positive-decimal">
+				<xs:annotation>
+					<xs:documentation>The price you would be charged for this product or service.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="document-status" type="lt:document-status">
+				<xs:annotation>
+					<xs:documentation>Details about the status of document ordered</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:complexType name="document-status">
+				<xs:sequence>
+					<xs:element name="status" type="lt:doc-status">
+						<xs:annotation>
+							<xs:documentation>Status</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="date-time" type="xs:dateTime">
+						<xs:annotation>
+							<xs:documentation>Status timestamp</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="land-title-address-extension" type="lt:land-title-address-extension">
+				<xs:annotation>
+					<xs:documentation>Additional address attributes required for the Land Title's address searches for various States and Territories</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:complexType name="land-title-address-extension">
+				<xs:sequence>
+					<xs:element name="street-number-end" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The end house number when conducting a Land Title address search for Queensland only. </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="municipality" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The municipality when conducting a Land Title search for Victoria only.  Victoria Land Title office only supports a search by one of Suburb OR Postcode OR Municipality. In the event that you enter values for more than one of these values, the search will conducted on the first value only in this given order. </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="nsw-name-search-options" type="lt:nsw-name-search-options">
+				<xs:annotation>
+					<xs:documentation>Additional search parameters that are required as part of a New South Wales Land Titles name search</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:complexType name="nsw-name-search-options">
+				<xs:sequence>
+					<xs:element name="business-purpose" type="lt:nsw-business-purpose">
+						<xs:annotation>
+							<xs:documentation>Mandatory descriptor of the business purpose for the search. NSW Land Title Office require a Business Purpose to be identified prior to completing a Land Titles name search. See 'NSW Business Purpose' code list for possible values. </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="name-search-disclaimer" type="xs:boolean" default="false">
+						<xs:annotation>
+							<xs:documentation>By selecting 'true' you agree to the following: "I have authority to undertake this search and will respect an individual's right to privacy in accordance with the principles underpinning the NSW Privacy and Personal Information Protection Act, 1998 and the Commonwealth Privacy Act, 1998."</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="include-previous-owners" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Selecting 'true' extends the name search to include addresses previously owned by people with name details matching those searched. Only applicable to New South Wales name searches.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="business-purpose-other" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Optional element used to capture business purpose if Other is selected as type.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="title-by-lot-plan" type="lt:title-by-lot-plan">
+				<xs:annotation>
+					<xs:documentation>Ordering land title by lot-plan reference</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:complexType name="title-by-lot-plan">
+				<xs:sequence>
+					<xs:element name="plan-or-folio-reference" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>The Plan or Folio reference</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="lot-or-volume-reference" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>The Lot or Volume reference</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="prefix" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>For use for South Australia Land Title orders only.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="plan-type" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>For use for New South Wales Land Title orders only.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="title-by-reference" type="lt:title-by-reference">
+				<xs:annotation>
+					<xs:documentation>Ordering land title by title reference</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:complexType name="title-by-reference">
+				<xs:sequence>
+					<xs:element name="title-reference" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Title Reference.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="vic-name-search-options" type="lt:vic-name-search-options">
+				<xs:annotation>
+					<xs:documentation>Additional search parameters that are required as part of a Victoria Land Titles name search</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:complexType name="vic-name-search-options">
+				<xs:sequence>
+					<xs:element name="include-similar-names" type="xs:boolean" default="false">
+						<xs:annotation>
+							<xs:documentation>FUTURE USE ONLY – current implementation set to 'false'. Extends name search to include names that are a partial match to the search criteria. Set to 'true' to enable similar searches. Only applicable to Victoria name searches.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="address" type="lt:address">
+				<xs:annotation>
+					<xs:documentation>The standard Veda address format</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:complexType name="address">
+				<xs:sequence>
+					<xs:element name="property-name" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Building or Property Name.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="unit-number" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Unit or Flat Number.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="street-number" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Street / House / Property Number</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="street-name" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Street Name</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="street-type" type="lt:street-type" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Street Type code. See 'Street Type' code table for possible values. </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="street-type-suffix" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Street Type Suffix</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="suburb" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Suburb or Town</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="state" type="lt:state-territory" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>State or Territory codes. Refer to the 'State or Territory' code list  for possible values. </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="postcode" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Postal Code</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="country-code" type="lt:country-codes" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>FUTURE USE ONLY -  Country code of the country. Must conform to the ISO 3166 standard. Refer to the 'Country Code' table for possible values. </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="dpid" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>FUTURE USE ONLY -  Australia Post Delivery Point Identifier. </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="gnaf-pid" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>FUTURE USE ONLY -  GNAF data comes from PSMA and identifies every surveyed property in Australia. </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="malid" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>FUTURE USE ONLY -  Master Address List ID. Veda's unique  location identifier</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="document-price" type="lt:document-price">
+				<xs:annotation>
+					<xs:documentation>The price of the document if you were to order it.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:complexType name="document-price">
+				<xs:sequence>
+					<xs:element ref="lt:price-value" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The price of the document if you were to order it.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="individual-owner" type="lt:individual-owner">
+				<xs:annotation>
+					<xs:documentation>Information relating to a title owner that is an Individual.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:complexType name="individual-owner">
+				<xs:sequence>
+					<xs:element name="title" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>FUTURE USE ONLY - A name that describes an individual's position, job, profession or marital status.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="first-given-name" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>First Name. Also referred to as Christian Name.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="other-given-name" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Other given name. Also referred to as middle name.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="family-name" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Family Name. Also referred to as Surname.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="gender" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>FUTURE USE ONLY - A descriptor of the gender of an individual.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="land-title" type="lt:land-title">
+				<xs:annotation>
+					<xs:documentation>Property legislation in all Australian states and territories is based on the Torrens principle of registration of title. Each state and territory has a central register of all land in the state which shows the owner of the land. The land title is the official record. It can also include information about mortgages, covenants, caveats and easements.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:complexType name="land-title">
+				<xs:sequence>
+					<xs:element ref="lt:state-territory-land-registry"/>
+					<xs:element name="title-reference" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Title Reference.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="title-description" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Title Description.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="lt:address" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="lt:document-price" minOccurs="0"/>
+					<xs:element ref="lt:related-land-title-document" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="lt:title-owner" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="lt:lot-plan-volume-folio" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="fielded-data" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Container to hold Land Title fielded data - online state based.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="response">
+									<xs:annotation>
+										<xs:documentation>Holds details of the outcome of parsing the Land Titles Fielded Data</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="return-code">
+												<xs:annotation>
+													<xs:documentation>Return code from parser</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:token">
+														<xs:enumeration value="S">
+															<xs:annotation>
+																<xs:documentation>Success - all mandatory sections could be parsed successfully.</xs:documentation>
+															</xs:annotation>
+														</xs:enumeration>
+														<xs:enumeration value="F">
+															<xs:annotation>
+																<xs:documentation>Failure - no mandatory sections could be parsed successfully or unsupported title reference type encountered.</xs:documentation>
+															</xs:annotation>
+														</xs:enumeration>
+														<xs:enumeration value="P">
+															<xs:annotation>
+																<xs:documentation>Partial - not all mandatory sections could be parsed successfully. </xs:documentation>
+															</xs:annotation>
+														</xs:enumeration>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="return-message" type="xs:string" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Message returned for unsuccessfully parsed land title extract.</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="diagnostics-found" type="xs:boolean" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>A flag used to indicate whether any diagnostics (non-parseable text) was identified during the parsing of the land title extract.</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:choice minOccurs="0">
+									<xs:element ref="lt:qld-fielded-data">
+										<xs:annotation>
+											<xs:documentation>QLD Land Title fielded data collection</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element ref="lt:nsw-fielded-data">
+										<xs:annotation>
+											<xs:documentation>NSW Land Title fielded data collection</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element ref="lt:vic-fielded-data">
+										<xs:annotation>
+											<xs:documentation>VIC Land Title fielded data collection</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:choice>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="lot-plan-volume-folio" type="lt:lot-plan-volume-folio">
+				<xs:annotation>
+					<xs:documentation>Plans defines the boundaries of a parcel of land at the date upon which it was registered.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:complexType name="lot-plan-volume-folio">
+				<xs:sequence>
+					<xs:element name="plan-or-folio-reference" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>The Plan or Folio reference</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="lot-or-volume-reference" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The Lot or Volume reference</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="plan-type" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The plan creates the legal identity of the land. Each state has different types of plan but common types include deposited plans: which most commonly depict a subdivision of a parcel of land, strata plans: which depict the subdivision of a parcel of land to allow multiple occupancy and separate ownership of individual units, eg home unit and town house developments,and community plans: which depict the development of planned communities of any type where the use of some land is shared.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="organisation-owner" type="lt:organisation-owner">
+				<xs:annotation>
+					<xs:documentation>Information relating to a title owner that is an Organisation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:complexType name="organisation-owner">
+				<xs:sequence>
+					<xs:element name="name" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>The name of the organisation</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="related-land-title-document" type="lt:related-land-title-document">
+				<xs:annotation>
+					<xs:documentation>Documents that are related to a Land Title registration, other than the Title report. Including Mortgage, Plans etc</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:complexType name="related-land-title-document">
+				<xs:sequence>
+					<xs:element name="document-type" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Document type</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="dealing-number" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>The number associated with the document</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="lt:document-price" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="title-owner" type="lt:title-owner">
+				<xs:annotation>
+					<xs:documentation>The details of the owner of the Title. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:complexType name="title-owner">
+				<xs:sequence>
+					<xs:choice>
+						<xs:element ref="lt:individual-owner"/>
+						<xs:element ref="lt:organisation-owner"/>
+					</xs:choice>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="state-territory-land-registry" type="lt:state-territory-land-registry">
+				<xs:annotation>
+					<xs:documentation>The state and territory land titles registry in which the Title is recorded.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- Definition of request / response structures -->
+			<xs:element name="search-land-titles-request" type="lt:search-land-titles-request-type"/>
+			<xs:element name="search-land-titles-response" type="lt:search-land-titles-response-type"/>
+			<xs:element name="order-document-request" type="lt:order-document-request-type"/>
+			<xs:element name="order-document-response" type="lt:order-document-response-type"/>
+			<xs:element name="deliver-document-request" type="lt:deliver-document-request-type"/>
+			<xs:element name="deliver-document-response" type="lt:deliver-document-response-type"/>
+			<xs:element name="search-land-titles-request-data" type="lt:search-land-titles-request-data-type">
+				<xs:annotation>
+					<xs:documentation>Container for request information related to the search land titles.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="search-land-titles-response-data" type="lt:search-land-titles-response-data-type">
+				<xs:annotation>
+					<xs:documentation>Container for response information related to the search land titles.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="order-document-request-data" type="lt:order-document-request-data-type">
+				<xs:annotation>
+					<xs:documentation>Container for request information related to the order document.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="order-document-response-data" type="lt:order-document-response-data-type">
+				<xs:annotation>
+					<xs:documentation>Container for response information related to the order document.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deliver-document-request-data" type="lt:deliver-document-request-data-type">
+				<xs:annotation>
+					<xs:documentation>Container for request information related to the deliver document.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deliver-document-response-data" type="lt:deliver-document-response-data-type">
+				<xs:annotation>
+					<xs:documentation>Container for response information related to the deliver document.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="land-title-search-by-name-request" type="lt:land-title-search-by-name-request-type">
+				<xs:annotation>
+					<xs:documentation>Container for request information related to the search land titles by name.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="land-title-search-by-lot-plan-request" type="lt:land-title-search-by-lot-plan-request-type">
+				<xs:annotation>
+					<xs:documentation>Container for request information related to the search land titles by lot-plan.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="land-title-search-by-address-request" type="lt:land-title-search-by-address-request-type">
+				<xs:annotation>
+					<xs:documentation>Container for request information related to the search land titles by address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="order-title-request" type="lt:order-title-request-type">
+				<xs:annotation>
+					<xs:documentation>Container for ordering a land title report.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="order-related-document-request" type="lt:order-related-document-request-type">
+				<xs:annotation>
+					<xs:documentation>Container for ordering related lnad titrle report documents.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="land-titles">
+				<xs:annotation>
+					<xs:documentation>A list of land titles references matching input Land Titles search criteria.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="lt:land-title" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="error-code" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Error Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="error-description" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Error Description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="error-detail" type="xs:string"/>
+			<xs:element name="errors">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="lt:error" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="error" type="lt:error-type">
+				<xs:annotation>
+					<xs:documentation>Container for application error messages</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="general-messages" type="lt:messages-type">
+				<xs:annotation>
+					<xs:documentation>Container for general messages related to the response. It does not relate to a specific element.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="request-header" type="lt:request-header">
+				<xs:annotation>
+					<xs:documentation>Container for control information related to the request.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="response-header" type="lt:response-header">
+				<xs:annotation>
+					<xs:documentation>Container for control information related to the response</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:complexType name="messages-type">
+				<xs:sequence>
+					<xs:element name="message" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Product message</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:simpleContent>
+								<xs:extension base="xs:string">
+									<xs:attribute name="code" type="xs:token">
+										<xs:annotation>
+											<xs:documentation>Code associated with the message.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:extension>
+							</xs:simpleContent>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="error-type">
+				<xs:sequence>
+					<xs:element ref="lt:error-code"/>
+					<xs:element ref="lt:error-description"/>
+					<xs:element ref="lt:error-detail" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="search-land-titles-request-type">
+				<xs:annotation>
+					<xs:documentation>Complex Type for Document Search By Organisation Request Type</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element ref="lt:request-header"/>
+					<xs:element ref="lt:search-land-titles-request-data"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="search-land-titles-response-type">
+				<xs:annotation>
+					<xs:documentation>Complex Type for Document Search By Organisation Response Type</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element ref="lt:response-header"/>
+					<xs:element ref="lt:search-land-titles-response-data" minOccurs="0"/>
+					<xs:element ref="lt:general-messages" minOccurs="0"/>
+					<xs:element ref="lt:errors" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="search-land-titles-request-data-type">
+				<xs:sequence>
+					<xs:element ref="lt:state-territory-land-registry"/>
+					<xs:element ref="lt:client-references" minOccurs="0"/>
+					<xs:element name="price-confirm-proceed" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>FUTURE USE ONLY - If price confirm is turned on and no price confirm proceed value is selected, the response will contain the price details of the product or service that has been queried but the search request will not be placed. To continue with the search request, the request must be resubmitted  with this value set to 'true'. If the initial request has the price confirm request set to true, the search request will proceed without the need for further confirmation from the user. </xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:token">
+								<xs:enumeration value=""/>
+								<xs:enumeration value="true"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:choice>
+						<xs:element ref="lt:land-title-search-by-name-request"/>
+						<xs:element ref="lt:land-title-search-by-address-request"/>
+						<xs:element ref="lt:land-title-search-by-lot-plan-request"/>
+					</xs:choice>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="search-land-titles-response-data-type">
+				<xs:choice>
+					<xs:sequence>
+						<xs:element ref="lt:land-titles"/>
+						<xs:element ref="lt:price-paid" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The price you have been charged for searching land titles.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+					<xs:sequence>
+						<xs:element ref="lt:price-value" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>FUTURE USE ONLY - The price you would be charged if you proceeded with searching land titles.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:choice>
+			</xs:complexType>
+			<xs:complexType name="order-document-request-data-type">
+				<xs:sequence>
+					<xs:element ref="lt:state-territory-land-registry"/>
+					<xs:element ref="lt:client-references" minOccurs="0"/>
+					<xs:element name="price-confirm-proceed" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>FUTURE USE ONLY - If price confirm is turned on and no price confirm proceed value is selected, the response will contain the price details of the product or service that has been queried but the order will not be placed. To continue with the order, the request must be resubmitted with this value set to 'true'. If the initial request has the price confirm request set to true, the order will proceed without the need for further confirmation from the user. </xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:token">
+								<xs:enumeration value=""/>
+								<xs:enumeration value="true"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="duplicate-check-proceed" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>If duplicate check is turned on and no duplicate check proceed value is selected in the request, the response will return the details of any document order that match the order request. The order will not be placed. To select the duplicate, the request must be resubmitted with this value set to 'true'. To order a new document, the request must be resubmitted with this value set to 'false'. If the initial request has the duplicate check request set to true, any available duplicates will always be selected without the need for further confirmation from the user. If the initial request has the duplicate check request set to 'false', a new order will always be selected without the need for further confirmation from the user.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:token">
+								<xs:enumeration value=""/>
+								<xs:enumeration value="true"/>
+								<xs:enumeration value="false"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="callback-notify" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Specifies the client callback endpoint to respond to notification events triggered when the ordered document is ready for delivery.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:anyURI">
+								<xs:pattern value="https?://.+"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element ref="lt:title-owner" minOccurs="0"/>
+					<xs:element ref="lt:address" minOccurs="0"/>
+					<xs:element name="supporting-comments" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Any additional comments or information to assist in the Land Titles order request. Maximum of 1000 characters in length. </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="lt:customer-contact-details" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Contact details of the user in the event that Veda need to contact you about the order you have requested.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="order-title-proceed" type="xs:boolean" default="true">
+						<xs:annotation>
+							<xs:documentation>Flag used to indicate whether a land title report is to be ordered. Only used by offline states if title-by-reference / title-by-lot-plan is unknown.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="lt:order-title-request" minOccurs="0"/>
+					<xs:element ref="lt:order-related-document-request" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Container for ordering related land title documents.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="order-related-document-request-type">
+				<xs:sequence>
+					<xs:element name="document-type" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Document type</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="dealing-number" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The number associated with the document</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="order-document-request-type">
+				<xs:sequence>
+					<xs:element ref="lt:request-header"/>
+					<xs:element ref="lt:order-document-request-data"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="order-document-response-data-type">
+				<xs:choice>
+					<xs:element ref="lt:order-details"/>
+					<xs:sequence>
+						<xs:element ref="lt:duplicate-details" minOccurs="0"/>
+						<xs:element ref="lt:price-value" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>FUTURE USE ONLY - The price you would be charged if you proceeded with ordering the original document.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:choice>
+			</xs:complexType>
+			<xs:complexType name="order-document-response-type">
+				<xs:sequence>
+					<xs:element ref="lt:response-header"/>
+					<xs:element ref="lt:order-document-response-data" minOccurs="0"/>
+					<xs:element ref="lt:general-messages" minOccurs="0"/>
+					<xs:element ref="lt:errors" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="deliver-document-request-data-type">
+				<xs:sequence>
+					<xs:element ref="lt:enquiry-id">
+						<xs:annotation>
+							<xs:documentation>Enquiry-id of the ordered document ready to be delivered.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="content-type" type="xs:token" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Internet media type the report data should be returned in</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="deliver-document-response-data-type">
+				<xs:sequence>
+					<xs:element ref="lt:price-paid" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The price you have been charged for having the document delivered.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="lt:document-status"/>
+					<xs:element ref="lt:enquiry-id">
+						<xs:annotation>
+							<xs:documentation>Enquiry-id of the report data being returned.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="lt:land-title" minOccurs="0"/>
+					<xs:element name="binary-data" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Binary representation of the report encoded in base64</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:simpleContent>
+								<xs:restriction base="xmime:base64Binary">
+									<xs:attribute ref="xmime:contentType" use="required"/>
+								</xs:restriction>
+							</xs:simpleContent>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="xml-data" type="xs:anyType" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>XML representation of the report</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="deliver-document-response-type">
+				<xs:sequence>
+					<xs:element ref="lt:response-header"/>
+					<xs:element ref="lt:deliver-document-response-data" minOccurs="0"/>
+					<xs:element ref="lt:general-messages" minOccurs="0"/>
+					<xs:element ref="lt:errors" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="deliver-document-request-type">
+				<xs:sequence>
+					<xs:element ref="lt:request-header"/>
+					<xs:element ref="lt:deliver-document-request-data"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="order-title-request-type">
+				<xs:sequence>
+					<xs:choice>
+						<xs:element ref="lt:title-by-reference"/>
+						<xs:element ref="lt:title-by-lot-plan"/>
+					</xs:choice>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="land-title-search-by-name-request-type">
+				<xs:sequence>
+					<xs:element ref="lt:title-owner"/>
+					<xs:element ref="lt:nsw-name-search-options" minOccurs="0"/>
+					<xs:element ref="lt:vic-name-search-options" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="land-title-search-by-lot-plan-request-type">
+				<xs:sequence>
+					<xs:element ref="lt:lot-plan-volume-folio"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="land-title-search-by-address-request-type">
+				<xs:sequence>
+					<xs:element ref="lt:address"/>
+					<xs:element ref="lt:land-title-address-extension" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="request-header">
+				<xs:sequence>
+					<xs:element name="client-reference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Client reference id associated with the transaction referenced by the enquiry-id.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:token">
+								<xs:minLength value="1"/>
+								<xs:maxLength value="40" fixed="false"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="operator-id" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Operator (or system) identifier submitting this request transaction - this value will be returned back in response for traceability.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:token">
+								<xs:minLength value="1"/>
+								<xs:maxLength value="20" fixed="false"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="operator-name" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Operator name submitting this request transaction - this value will be returned back in response for traceability.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:token">
+								<xs:minLength value="2"/>
+								<xs:maxLength value="20" fixed="false"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="response-header">
+				<xs:sequence>
+					<xs:element name="datetime-requested" type="xs:dateTime">
+						<xs:annotation>
+							<xs:documentation>Datetime of request in ccyy-mm-ddThh:mm:ss format.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="datetime-generated" type="xs:dateTime" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Datetime of response in ccyy-mm-ddThh:mm:ss format.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="client-reference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Client reference id associated with the transaction referenced by the enquiry-id.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:token">
+								<xs:minLength value="1"/>
+								<xs:maxLength value="40" fixed="false"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="operator-id" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Operator (or system) identifier submitting this request transaction - this value will be returned back in response for traceability.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:token">
+								<xs:minLength value="1"/>
+								<xs:maxLength value="20" fixed="false"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="operator-name" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Operator name submitting this request transaction - this value will be returned back in response for traceability.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:token">
+								<xs:minLength value="2"/>
+								<xs:maxLength value="20" fixed="false"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="searchLandTitlesRequest">
+		<wsdl:part name="request" element="lt:search-land-titles-request"/>
+	</wsdl:message>
+	<wsdl:message name="searchLandTitlesResponse">
+		<wsdl:part name="response" element="lt:search-land-titles-response"/>
+	</wsdl:message>
+	<wsdl:message name="orderDocumentRequest">
+		<wsdl:part name="request" element="lt:order-document-request"/>
+	</wsdl:message>
+	<wsdl:message name="orderDocumentResponse">
+		<wsdl:part name="response" element="lt:order-document-response"/>
+	</wsdl:message>
+	<wsdl:message name="deliverDocumentRequest">
+		<wsdl:part name="request" element="lt:deliver-document-request"/>
+	</wsdl:message>
+	<wsdl:message name="deliverDocumentResponse">
+		<wsdl:part name="response" element="lt:deliver-document-response"/>
+	</wsdl:message>
+	<wsdl:portType name="LandTitlesManagementPortType">
+		<wsdl:documentation>Business interface for client initiated land titles operations</wsdl:documentation>
+		<wsdl:operation name="searchLandTitles">
+			<wsdl:input message="tns:searchLandTitlesRequest" wsaw:Action="http://vedaxml.com/land-titles/searchLandTitlesRequest"/>
+			<wsdl:output message="tns:searchLandTitlesResponse" wsaw:Action="http://vedaxml.com/land-titles/searchLandTitlesResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="orderDocument">
+			<wsdl:input message="tns:orderDocumentRequest" wsaw:Action="http://vedaxml.com/land-titles/orderDocumentRequest"/>
+			<wsdl:output message="tns:orderDocumentResponse" wsaw:Action="http://vedaxml.com/land-titles/orderDocumentResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="deliverDocument">
+			<wsdl:input message="tns:deliverDocumentRequest" wsaw:Action="http://vedaxml.com/land-titles/deliverDocumentRequest"/>
+			<wsdl:output message="tns:deliverDocumentResponse" wsaw:Action="http://vedaxml.com/land-titles/deliverDocumentResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="LandTitlesManagementSOAP11Binding" type="tns:LandTitlesManagementPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsaw:UsingAddressing wsdl:required="true"/>
+		<wsdl:operation name="searchLandTitles">
+			<soap:operation soapAction="http://vedaxml.com/land-titles/searchLandTitles" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="orderDocument">
+			<soap:operation soapAction="http://vedaxml.com/land-titles/orderDocument" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="deliverDocument">
+			<soap:operation soapAction="http://vedaxml.com/land-titles/deliverDocument" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="LandTitlesManagementSOAP12Binding" type="tns:LandTitlesManagementPortType">
+		<soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsaw:UsingAddressing wsdl:required="true"/>
+		<wsdl:operation name="searchLandTitles">
+			<soap12:operation soapAction="http://vedaxml.com/land-titles/searchLandTitles" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="orderDocument">
+			<soap12:operation soapAction="http://vedaxml.com/land-titles/orderDocument" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="deliverDocument">
+			<soap12:operation soapAction="http://vedaxml.com/land-titles/deliverDocument" soapActionRequired="true" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="LandTitlesManagementService">
+		<wsdl:port name="LandTitlesManagementSOAP11Port" binding="tns:LandTitlesManagementSOAP11Binding">
+			<soap:address location="https://vedaxml.com/sys2/soap11/land-titles-v1"/>
+		</wsdl:port>
+		<wsdl:port name="LandTitlesManagementSOAP12Port" binding="tns:LandTitlesManagementSOAP12Binding">
+			<soap12:address location="https://vedaxml.com/sys2/soap12/land-titles-v1"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
